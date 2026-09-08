@@ -1,22 +1,22 @@
 <!doctype html>
 <html lang="ko">
 <head>
-<meta charset="utf-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>문장 구조 실험실</title>
-  <meta name="description" content="중학교 3학년 국어 문법 수업용 인터랙티브 앱 — 품사, 문장 성분, 문장의 짜임" />
+  <meta name="description" content="중학교 3학년 국어 문법 수업용 인터랙티브 앱 — 품사, 문장 성분, 문장의 짜임, 표현 의도" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
 <div class="app" id="app">
   <header class="topbar">
     <div class="topbar-inner">
-      <div class="brand">
-        <div class="brand-mark">문</div>
-        <div><div class="brand-title">문장 구조 실험실</div><div class="brand-sub">중3 국어 · 문장의 짜임</div></div>
-      </div>
+      <button class="brand" data-go="home" aria-label="홈으로">
+        <span class="brand-mark">문</span>
+        <span><strong>문장 구조 실험실</strong><small>중3 국어 · 문장의 짜임</small></span>
+      </button>
       <div class="top-actions">
-        <button class="chip" id="resetBtn">진행 초기화</button>
+        <button class="ghost" id="resetBtn">진행 초기화</button>
         <button class="mode-toggle" id="teacherModeBtn">교사 모드</button>
       </div>
     </div>
@@ -24,8 +24,8 @@
 
   <div class="layout">
     <aside class="sidebar">
-      <div class="nav-label">LEARNING PATH</div>
-      <div id="sideNav"></div>
+      <div class="side-title">학습 경로</div>
+      <nav id="sideNav"></nav>
       <div class="progress-wrap">
         <div class="progress-row"><span>학습 진행</span><strong id="progressText">0%</strong></div>
         <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
@@ -35,109 +35,218 @@
     <main class="content">
       <section class="section active" data-section="home">
         <div class="hero">
-          <span class="eyebrow">교과서·지도서 흐름 기반 수업용 프로토타입</span>
-          <h1>단어의 정체부터<br>문장의 구조까지.</h1>
-          <p>품사와 문장 성분을 구별하고, 주어·서술어 관계를 따라 홑문장과 겹문장을 분석한 뒤, 이어진문장과 안은문장을 직접 만들어 봅니다.</p>
-          <div class="hero-actions"><button class="primary" data-go="pos">1단계부터 시작</button><button class="secondary" data-go="game">수업 게임 바로 가기</button></div>
+          <div>
+            <span class="eyebrow">교과서 · 지도서 · 수업 PPT 통합</span>
+            <h1>문장을 외우지 말고<br>직접 뜯어보고 다시 만들어 봅시다.</h1>
+            <p>1학년 품사를 짧게 복습한 뒤 문장의 기본 구조와 문장 성분을 확인하고, 홑문장·겹문장, 이어진문장·안은문장까지 분석하고 직접 만듭니다.</p>
+            <div class="hero-actions">
+              <button class="primary" data-go="pos">수업 시작</button>
+              <button class="secondary" data-go="game">땅따먹기 바로 가기</button>
+            </div>
+          </div>
+          <div class="goal-card">
+            <span class="mini-label">학습 목표</span>
+            <strong>문장의 짜임을 탐구하고, 다양한 짜임의 문장을 효과적으로 사용할 수 있다.</strong>
+            <div class="goal-tags"><span>분석</span><span>만들기</span><span>표현 의도</span></div>
+          </div>
         </div>
-        <div class="section-header"><div><h2 class="section-title">오늘의 학습 경로</h2><p class="section-desc">설명보다 먼저 만지고 분류하며 개념을 발견하도록 구성했습니다.</p></div></div>
-        <div class="grid grid-3" id="moduleGrid"></div>
+        <div class="section-header"><div><h2>오늘의 학습 경로</h2><p>개념 → 짧은 확인 → 직접 만들기 순서로 진행합니다.</p></div></div>
+        <div class="module-grid" id="moduleGrid"></div>
+        <div class="teacher-note home-note">
+          <strong>수업 운영 예시</strong>
+          <p>1차시 품사 복습·기본 구조 → 2~3차시 문장 성분 → 4차시 홑문장·겹문장 → 5차시 이어진문장 → 6~7차시 안은문장 → 8차시 표현 의도·문장 만들기 → 정리 활동으로 땅따먹기를 활용할 수 있습니다.</p>
+        </div>
       </section>
 
       <section class="section" data-section="pos">
-        <div class="section-header"><div><span class="pill">1학년 복습</span><h2 class="section-title">9품사 빠른 복습</h2><p class="section-desc">품사는 ‘단어의 갈래’입니다. 먼저 단어의 정체를 확인합니다.</p></div></div>
-        <div class="teacher-note">지도서에서는 문장 성분·문장의 짜임 학습 전에 품사를 떠올리게 하고, 특히 품사와 문장 성분의 혼동을 줄이도록 권합니다.</div>
-        <div class="grid grid-2" style="margin-top:16px">
+        <div class="section-header"><div><span class="pill">1학년 복습</span><h2>품사는 단어의 갈래</h2><p>3학년 문장 성분과 헷갈리지 않도록 9품사를 먼저 빠르게 확인합니다.</p></div></div>
+        <div class="teacher-note">품사와 문장 성분을 혼동하는 학생이 많으므로, 본문 학습 전에 9품사를 짧게 복습하는 흐름입니다.</div>
+        <div class="grid two">
           <div class="card">
-            <h3>품사 체계 한눈에 보기</h3>
-            <div class="tree">
-              <div class="tree-row"><div class="tree-key">체언</div><div class="tree-value">명사 · 대명사 · 수사</div></div>
-              <div class="tree-row"><div class="tree-key">용언</div><div class="tree-value">동사 · 형용사</div></div>
-              <div class="tree-row"><div class="tree-key">수식언</div><div class="tree-value">관형사 · 부사</div></div>
-              <div class="tree-row"><div class="tree-key">관계언</div><div class="tree-value">조사</div></div>
-              <div class="tree-row"><div class="tree-key">독립언</div><div class="tree-value">감탄사</div></div>
+            <h3>9품사 한눈에 보기</h3>
+            <div class="pos-tree">
+              <div><b>체언</b><span>명사 · 대명사 · 수사</span></div>
+              <div><b>용언</b><span>동사 · 형용사</span></div>
+              <div><b>수식언</b><span>관형사 · 부사</span></div>
+              <div><b>관계언</b><span>조사</span></div>
+              <div><b>독립언</b><span>감탄사</span></div>
             </div>
           </div>
-          <div class="card">
-            <h3 id="posQTitle">이 단어의 품사는?</h3>
-            <div class="sentence-box"><div class="sentence" id="posWord">책</div><div class="tiny" id="posHint">문장에서 이름을 나타내는 단어</div></div>
-            <div class="choice-row" id="posChoices"></div>
+          <div class="card quiz-card">
+            <div class="quiz-head"><h3>9품사 빠른 확인</h3><span id="posCount" class="counter"></span></div>
+            <div class="prompt-box"><strong id="posWord"></strong><small id="posHint"></small></div>
+            <div class="choices" id="posChoices"></div>
             <div class="feedback" id="posFeedback"></div>
-            <div class="choice-row"><button class="secondary" id="posPrev">이전 문제</button><button class="secondary" id="posNext">다음 문제</button></div>
+            <div class="nav-actions"><button class="secondary" id="posPrev">이전</button><button class="secondary" id="posNext">다음</button></div>
           </div>
         </div>
-      </section>
-
-      <section class="section" data-section="identity">
-        <div class="section-header"><div><span class="pill">핵심 오개념</span><h2 class="section-title">품사와 문장 성분은 다르다</h2><p class="section-desc">품사는 단어의 ‘정체’, 문장 성분은 문장 안에서 맡은 ‘역할’입니다.</p></div></div>
-        <div class="grid grid-2">
-          <div class="card">
-            <h3>같은 말도 역할은 달라질 수 있어요</h3>
-            <div id="identityExamples"></div>
+        <div class="card identity-card">
+          <div class="quiz-head"><div><span class="pill">핵심 오개념</span><h3>품사와 문장 성분은 다릅니다</h3></div><span id="idCount" class="counter"></span></div>
+          <p class="concept-line"><b>품사</b>는 단어 자체의 갈래, <b>문장 성분</b>은 그 문장에서 맡은 역할입니다.</p>
+          <div class="example-strip" id="identityExamples"></div>
+          <div class="prompt-box"><strong id="idSentence"></strong><small id="idTarget"></small></div>
+          <div class="compare-grid">
+            <div><span class="mini-label">품사</span><div class="choices" id="idPosChoices"></div></div>
+            <div><span class="mini-label">문장 성분</span><div class="choices" id="idCompChoices"></div></div>
           </div>
-          <div class="card">
-            <h3>정체 vs 역할 퀴즈</h3>
-            <div class="sentence-box"><div class="sentence" id="idSentence"></div><div class="tiny" id="idTarget"></div></div>
-            <div class="compare"><div class="compare-box"><div class="label">품사</div><div class="choice-row" id="idPosChoices"></div></div><div class="compare-arrow">→</div><div class="compare-box"><div class="label">문장 성분</div><div class="choice-row" id="idCompChoices"></div></div></div>
-            <div class="feedback" id="idFeedback"></div>
-            <div class="choice-row"><button class="secondary" id="idPrev">이전</button><button class="primary" id="idCheck">확인</button><button class="secondary" id="idNext">다음</button></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" data-section="components">
-        <div class="section-header"><div><span class="pill">3학년 핵심</span><h2 class="section-title">문장 성분 분석</h2><p class="section-desc">주성분 → 부속 성분 → 독립 성분 순으로 문장의 역할을 찾습니다.</p></div></div>
-        <div class="teacher-note">주성분은 주어·서술어·목적어·보어, 부속 성분은 관형어·부사어, 독립 성분은 독립어입니다. 먼저 주성분을 찾고 나머지를 분류하게 하면 부담이 줄어듭니다.</div>
-        <div class="card" style="margin-top:16px">
-          <div class="lesson-step"><div class="step-num">1</div><div><strong>서술어부터 찾기</strong><div class="tiny">문장의 중심에서 ‘어찌하다 / 어떠하다 / 무엇이다’를 찾습니다.</div></div></div>
-          <div class="lesson-step"><div class="step-num">2</div><div><strong>서술어가 요구하는 성분 찾기</strong><div class="tiny">주어, 목적어, 보어가 필요한지 확인합니다.</div></div></div>
-          <div class="lesson-step"><div class="step-num">3</div><div><strong>꾸미거나 독립된 성분 찾기</strong><div class="tiny">관형어·부사어·독립어를 구분합니다.</div></div></div>
-        </div>
-        <div class="card" style="margin-top:16px">
-          <h3>어절을 눌러 문장 성분을 지정하세요</h3>
-          <div class="sentence-box"><div class="sentence" id="compSentence"></div><div class="tokens" id="compTokens"></div></div>
-          <div class="choice-row" id="compLabels"></div>
-          <div class="feedback" id="compFeedback"></div>
-          <div class="choice-row"><button class="secondary" id="compPrev">이전 문장</button><button class="primary" id="compCheck">채점</button><button class="secondary teacher-only" id="compReveal">정답 보기</button><button class="secondary" id="compNext">다음 문장</button></div>
+          <div class="feedback" id="idFeedback"></div>
+          <div class="nav-actions"><button class="secondary" id="idPrev">이전</button><button class="primary" id="idCheck">확인</button><button class="secondary" id="idNext">다음</button></div>
         </div>
       </section>
 
       <section class="section" data-section="skeleton">
-        <div class="section-header"><div><span class="pill">문장 뼈대</span><h2 class="section-title">서술어가 문장의 기본 구조를 만든다</h2><p class="section-desc">주어와 서술어의 관계를 먼저 잡으면 문장의 짜임이 보입니다.</p></div></div>
-        <div class="grid grid-3">
-          <div class="card"><span class="pill">어찌하다</span><h3 style="margin-top:12px">강아지가 달린다.</h3><p>대상의 움직임을 나타냅니다.</p></div>
-          <div class="card"><span class="pill">어떠하다</span><h3 style="margin-top:12px">시냇물이 깨끗하다.</h3><p>대상의 상태나 성질을 나타냅니다.</p></div>
-          <div class="card"><span class="pill">무엇이다</span><h3 style="margin-top:12px">내일이 토요일이다.</h3><p>대상을 지정합니다.</p></div>
+        <div class="section-header"><div><span class="pill">문장의 기본 구조</span><h2>서술어를 보면 문장의 뼈대가 보입니다</h2><p>우리말의 기본 구조는 서술어의 종류에 따라 세 가지 유형으로 나누어 볼 수 있습니다.</p></div></div>
+        <div class="concept-grid three">
+          <div class="concept-card"><span>①</span><b>누가/무엇이 + 어찌하다</b><p>대상의 움직임을 나타냄</p><em>강아지가 달린다.</em></div>
+          <div class="concept-card"><span>②</span><b>누가/무엇이 + 어떠하다</b><p>대상의 상태나 성질을 나타냄</p><em>시냇물이 깨끗하다.</em></div>
+          <div class="concept-card"><span>③</span><b>누가/무엇이 + 무엇이다</b><p>대상을 지정함</p><em>내일이 토요일이다.</em></div>
         </div>
-        <div class="card" style="margin-top:16px"><h3>뼈대 찾기</h3><div class="sentence-box"><div class="sentence" id="skSentence"></div></div><div class="choice-row" id="skChoices"></div><div class="feedback" id="skFeedback"></div><div class="choice-row"><button class="secondary" id="skPrev">이전</button><button class="secondary" id="skNext">다음</button></div></div>
+        <div class="card quiz-card">
+          <div class="quiz-head"><h3>문장 뼈대 찾기</h3><span id="skCount" class="counter"></span></div>
+          <div class="prompt-box"><strong id="skSentence"></strong><small>서술어가 어떤 성격인지 먼저 생각해 보세요.</small></div>
+          <div class="choices" id="skChoices"></div>
+          <div class="feedback" id="skFeedback"></div>
+          <div class="nav-actions"><button class="secondary" id="skPrev">이전</button><button class="secondary" id="skNext">다음</button></div>
+        </div>
+      </section>
+
+      <section class="section" data-section="components">
+        <div class="section-header"><div><span class="pill">문장 성분</span><h2>문장 안에서 맡은 역할을 찾습니다</h2><p>주성분, 부속 성분, 독립 성분을 구분하고 실제 문장에서 역할을 분석합니다.</p></div></div>
+        <div class="component-summary">
+          <div class="summary-card main"><b>주성분</b><span>주어 · 서술어 · 목적어 · 보어</span><p>문장을 이루는 데 기본적으로 필요한 성분</p></div>
+          <div class="summary-card support"><b>부속 성분</b><span>관형어 · 부사어</span><p>주성분의 내용을 자세하게 꾸며 주는 성분</p></div>
+          <div class="summary-card independent"><b>독립 성분</b><span>독립어</span><p>다른 성분과 직접적인 관계 없이 독립적으로 쓰이는 성분</p></div>
+        </div>
+        <div class="term-grid">
+          <div><b>주어</b><p>동작이나 상태·성질 등의 주체</p></div>
+          <div><b>서술어</b><p>주어의 동작·상태·성질 등을 풀이</p></div>
+          <div><b>목적어</b><p>서술어가 나타내는 동작의 대상</p></div>
+          <div><b>보어</b><p>‘되다’, ‘아니다’ 등이 주어 외에 요구하는 성분</p></div>
+          <div><b>관형어</b><p>체언을 꾸며 주는 문장 성분</p></div>
+          <div><b>부사어</b><p>주로 용언을 꾸며 주는 문장 성분</p></div>
+          <div><b>독립어</b><p>부름·감탄·응답 등을 독립적으로 나타냄</p></div>
+        </div>
+        <div class="card quiz-card">
+          <div class="quiz-head"><h3>문장 성분 직접 지정</h3><span id="compCount" class="counter"></span></div>
+          <p>어절을 하나 누른 뒤 아래에서 문장 성분을 선택하세요.</p>
+          <div class="prompt-box"><strong id="compSentence"></strong><div class="tokens" id="compTokens"></div></div>
+          <div class="choices" id="compLabels"></div>
+          <div class="feedback" id="compFeedback"></div>
+          <div class="nav-actions"><button class="secondary" id="compPrev">이전 문장</button><button class="primary" id="compCheck">채점</button><button class="secondary teacher-only" id="compReveal">정답 보기</button><button class="secondary" id="compNext">다음 문장</button></div>
+        </div>
+        <div class="card delete-lab">
+          <div class="quiz-head"><div><span class="pill">PPT 활동 재구성</span><h3>지워도 문장이 온전할까?</h3></div><span id="delCount" class="counter"></span></div>
+          <div class="prompt-box"><strong id="delSentence"></strong><small>밑줄 친 부분을 지웠을 때도 기본 문장이 성립하는지 판단해 보세요.</small></div>
+          <div class="choices" id="delChoices"></div>
+          <div class="feedback" id="delFeedback"></div>
+          <div class="nav-actions"><button class="secondary" id="delPrev">이전</button><button class="secondary" id="delNext">다음</button></div>
+        </div>
       </section>
 
       <section class="section" data-section="structure">
-        <div class="section-header"><div><span class="pill">문장의 짜임</span><h2 class="section-title">홑문장과 겹문장</h2><p class="section-desc">주어와 서술어의 관계가 몇 번 나타나는지 확인합니다.</p></div></div>
-        <div class="grid grid-2">
-          <div class="card"><h3>판별 기준</h3><div class="tree"><div class="tree-row"><div class="tree-key">홑문장</div><div class="tree-value">주어와 서술어의 관계가 한 번</div></div><div class="tree-row"><div class="tree-key">겹문장</div><div class="tree-value">주어와 서술어의 관계가 두 번 이상</div></div></div><div class="inline-callout">겹문장은 다시 <strong>이어진문장</strong>과 <strong>안은문장</strong>으로 나뉩니다.</div></div>
-          <div class="card"><h3>주어·서술어 짝을 확인해 보세요</h3><div class="sentence-box"><div class="sentence" id="stSentence"></div><div id="pairLines" style="margin-top:10px"></div></div><div class="choice-row" id="stChoices"></div><div class="feedback" id="stFeedback"></div><div class="choice-row"><button class="secondary" id="stPrev">이전</button><button class="secondary" id="stPairs">짝 보기</button><button class="secondary" id="stNext">다음</button></div></div>
+        <div class="section-header"><div><span class="pill">문장의 짜임</span><h2>홑문장과 겹문장</h2><p>주어와 서술어의 관계가 몇 번 나타나는지가 기준입니다.</p></div></div>
+        <div class="grid two">
+          <div class="card criterion-card">
+            <div><span class="big-num">1</span><b>홑문장</b><p>주어와 서술어의 관계가 한 번</p></div>
+            <div><span class="big-num">2+</span><b>겹문장</b><p>주어와 서술어의 관계가 두 번 이상</p></div>
+            <div class="callout">겹문장은 결합 방식에 따라 <b>이어진문장</b>과 <b>안은문장</b>으로 나뉩니다.</div>
+          </div>
+          <div class="card quiz-card">
+            <div class="quiz-head"><h3>홑문장·겹문장 판별</h3><span id="stCount" class="counter"></span></div>
+            <div class="prompt-box"><strong id="stSentence"></strong><div id="pairLines"></div></div>
+            <div class="choices" id="stChoices"></div>
+            <div class="feedback" id="stFeedback"></div>
+            <div class="nav-actions"><button class="secondary" id="stPrev">이전</button><button class="secondary" id="stPairs">주어·서술어 짝 보기</button><button class="secondary" id="stNext">다음</button></div>
+          </div>
         </div>
       </section>
 
-      <section class="section" data-section="compound">
-        <div class="section-header"><div><span class="pill">겹문장</span><h2 class="section-title">이어진문장과 안은문장</h2><p class="section-desc">결합 방식과 절의 역할을 구분합니다.</p></div></div>
-        <div class="grid grid-2">
-          <div class="card"><h3>이어진문장</h3><p>둘 이상의 홑문장이 대등하거나 종속적으로 이어집니다.</p><div class="inline-callout"><strong>주의:</strong> 연결 어미만 보고 판단하지 않습니다. 예를 들어 ‘-고’도 문맥에 따라 종속적 관계를 나타낼 수 있습니다.</div></div>
-          <div class="card"><h3>안은문장</h3><p>한 문장이 다른 문장을 절의 형태로 안고, 그 절이 하나의 문장 성분처럼 쓰입니다.</p><div class="wordbank"><span class="word">명사절</span><span class="word">관형절</span><span class="word">부사절</span><span class="word">서술절</span><span class="word">인용절</span></div></div>
+      <section class="section" data-section="connected">
+        <div class="section-header"><div><span class="pill">이어진문장</span><h2>앞 절과 뒤 절의 의미 관계를 봅니다</h2><p>연결 어미 모양만 보지 말고 두 절의 의미 관계가 대등한지 종속적인지 판단합니다.</p></div></div>
+        <div class="grid two">
+          <div class="card"><h3>대등하게 이어진문장</h3><p>앞 절과 뒤 절의 의미 관계가 대등합니다.</p><div class="connector-list"><span>나열 -고, -(으)며</span><span>대조 -지만, -(으)나</span><span>선택 -거나, -든지</span></div></div>
+          <div class="card"><h3>종속적으로 이어진문장</h3><p>한 절이 다른 절에 의미상 종속됩니다.</p><div class="connector-list"><span>원인 -아서/어서, -(으)니</span><span>조건 -(으)면, -거든</span><span>목적·의도 -(으)러, -(으)려고</span></div></div>
         </div>
-        <div class="card" style="margin-top:16px"><h3>겹문장 분류 퀴즈</h3><div class="sentence-box"><div class="sentence" id="cpSentence"></div><div class="tiny" id="cpHint"></div></div><div class="choice-row" id="cpChoices"></div><div class="feedback" id="cpFeedback"></div><div class="choice-row"><button class="secondary" id="cpPrev">이전</button><button class="secondary" id="cpNext">다음</button></div></div>
-        <div class="card" style="margin-top:16px"><h3>표현 의도 비교</h3><p>같은 내용도 문장 구조를 어떻게 선택하느냐에 따라 초점이 달라집니다.</p><div class="compare" style="margin-top:16px"><div class="compare-box"><div class="label">이어진문장</div><div class="big-answer">그 영화는 국제 대회에서 상을 받았고 내일 개봉한다.</div><p style="margin-top:8px">두 사실을 나란히 제시</p></div><div class="compare-arrow">↔</div><div class="compare-box"><div class="label">관형절을 가진 안은문장</div><div class="big-answer">국제 대회에서 상을 받은 그 영화는 내일 개봉한다.</div><p style="margin-top:8px">‘그 영화’가 어떤 영화인지 구체화</p></div></div></div>
+        <div class="callout warning"><b>주의</b> ‘-고’가 쓰였다고 언제나 대등한 것은 아닙니다. 앞뒤 절의 의미 관계를 확인합니다.</div>
+        <div class="card quiz-card">
+          <div class="quiz-head"><h3>이어진문장 분류</h3><span id="cnCount" class="counter"></span></div>
+          <div class="prompt-box"><strong id="cnSentence"></strong><small id="cnHint"></small></div>
+          <div class="choices" id="cnChoices"></div>
+          <div class="feedback" id="cnFeedback"></div>
+          <div class="nav-actions"><button class="secondary" id="cnPrev">이전</button><button class="secondary" id="cnNext">다음</button></div>
+        </div>
+        <div class="card build-card">
+          <div class="quiz-head"><div><span class="pill">직접 만들기</span><h3>두 홑문장을 하나로 이어 보세요</h3></div><span id="cbCount" class="counter"></span></div>
+          <div class="source-sentences"><span id="cbA"></span><span>+</span><span id="cbB"></span></div>
+          <div class="choices" id="cbChoices"></div>
+          <div class="feedback" id="cbFeedback"></div>
+          <div class="nav-actions"><button class="secondary" id="cbPrev">이전</button><button class="secondary" id="cbNext">다음</button></div>
+        </div>
+      </section>
+
+      <section class="section" data-section="embedded">
+        <div class="section-header"><div><span class="pill">안은문장</span><h2>한 문장이 다른 문장을 ‘절’로 안습니다</h2><p>안긴문장이 전체 문장에서 어떤 문장 성분 역할을 하는지 살펴봅니다.</p></div></div>
+        <div class="clause-grid">
+          <div><b>명사절</b><p>주어·목적어 등의 기능</p><span>-(으)ㅁ, -기</span></div>
+          <div><b>관형절</b><p>관형어의 기능</p><span>-(으)ㄴ, -는 등</span></div>
+          <div><b>부사절</b><p>부사어의 기능</p><span>-게, -도록 등</span></div>
+          <div><b>서술절</b><p>서술어의 기능</p><span>별도 전성 어미 없음</span></div>
+          <div><b>인용절</b><p>다른 사람의 말을 인용</p><span>직접 ‘라고’ / 간접 ‘고’</span></div>
+        </div>
+        <div class="card transform-card">
+          <div class="quiz-head"><div><span class="pill">문장 → 절</span><h3>안긴문장으로 바꾸기</h3></div><span id="trCount" class="counter"></span></div>
+          <div class="source-sentences"><span id="trSource"></span><span>→</span><strong id="trFrame"></strong></div>
+          <div class="choices" id="trChoices"></div>
+          <div class="feedback" id="trFeedback"></div>
+          <div class="nav-actions"><button class="secondary" id="trPrev">이전</button><button class="secondary" id="trNext">다음</button></div>
+        </div>
+        <div class="card quiz-card">
+          <div class="quiz-head"><h3>안은문장 종류 판별</h3><span id="emCount" class="counter"></span></div>
+          <div class="prompt-box"><strong id="emSentence"></strong><small id="emHint"></small></div>
+          <div class="choices" id="emChoices"></div>
+          <div class="feedback" id="emFeedback"></div>
+          <div class="nav-actions"><button class="secondary" id="emPrev">이전</button><button class="secondary" id="emNext">다음</button></div>
+        </div>
+        <div class="card quote-card">
+          <h3>직접 인용과 간접 인용</h3>
+          <div class="quote-compare"><div><span>직접 인용</span><b>민수는 “내일 갈게.”라고 말했다.</b><small>인용한 말을 그대로 제시 + ‘라고’</small></div><div><span>간접 인용</span><b>민수는 내일 가겠다고 말했다.</b><small>말하는 사람의 관점에 맞게 바꿈 + ‘고’</small></div></div>
+        </div>
+      </section>
+
+      <section class="section" data-section="intention">
+        <div class="section-header"><div><span class="pill">표현 의도</span><h2>같은 내용도 짜임에 따라 초점이 달라집니다</h2><p>문장 구조를 단순히 바꾸는 데서 끝내지 않고, 왜 그 구조를 선택했는지 생각합니다.</p></div></div>
+        <div class="card intention-card">
+          <span class="mini-label">같은 내용</span>
+          <p class="proposition">그 소설은 해외에서 유명하다. 그 소설은 영화로 만들어졌다.</p>
+          <div class="intent-options">
+            <button data-intent="parallel"><b>그 소설은 해외에서 유명하고 영화로 만들어졌다.</b><span>두 사실을 나란히 보여 주기</span></button>
+            <button data-intent="detail"><b>해외에서 유명한 그 소설은 영화로 만들어졌다.</b><span>어떤 소설인지 구체적으로 보여 주기</span></button>
+          </div>
+          <div class="feedback" id="intentFeedback"></div>
+        </div>
+        <div class="card final-mission">
+          <div><span class="pill">최종 미션</span><h3>짧은 글 속에서 여러 짜임을 사용해 보세요</h3><p>주제: 운동 · 취미 · 음악 · 음식 · 장래 희망 중 하나를 골라 3~5문장으로 씁니다.</p></div>
+          <textarea id="missionText" rows="7" placeholder="예) 내 취미는 ..."></textarea>
+          <div class="checklist">
+            <label><input type="checkbox" /> 홑문장을 두 문장 이상 썼다.</label>
+            <label><input type="checkbox" /> 이어진문장을 한 문장 이상 썼다.</label>
+            <label><input type="checkbox" /> 안은문장을 한 문장 이상 썼다.</label>
+            <label><input type="checkbox" /> 주어와 서술어의 호응을 확인했다.</label>
+            <label><input type="checkbox" /> 내가 표현하려는 의도가 잘 드러난다.</label>
+          </div>
+          <button class="secondary" id="saveMission">이 기기에서 임시 저장</button><span id="missionSaved" class="saved-msg"></span>
+          <div class="teacher-note"><b>교사 활용</b> 짝과 글을 바꾸어 문장의 짜임을 표시하고, 표현 의도가 잘 드러나는지 서로 확인하게 할 수 있습니다.</div>
+        </div>
       </section>
 
       <section class="section" data-section="game">
-        <div class="section-header"><div><span class="pill">모둠 수업</span><h2 class="section-title">문장 퀴즈 땅따먹기</h2><p class="section-desc">교과서 활동을 디지털 수업 게임으로 재구성했습니다.</p></div></div>
-        <div class="teacher-note">두 팀이 번갈아 문제를 풉니다. 정답이면 해당 칸을 차지하고, 틀리면 중립 칸이 됩니다. ‘한 번 더’와 ‘꽝’ 칸도 포함합니다.</div>
-        <div class="game-wrap" style="margin-top:16px">
+        <div class="section-header"><div><span class="pill">정리 활동</span><h2>문장 퀴즈 땅따먹기</h2><p>두 팀이 번갈아 문제를 풀며 칸을 차지합니다.</p></div></div>
+        <div class="teacher-note">교과서의 모둠 ‘문장 퀴즈 땅따먹기’ 활동을 디지털 수업 게임으로 재구성했습니다.</div>
+        <div class="game-layout">
           <div class="card"><div class="board" id="board"></div></div>
-          <div>
-            <div class="scoreboard"><div class="team active" id="teamA"><span class="tiny">A팀</span><strong id="scoreA">0</strong></div><div class="team" id="teamB"><span class="tiny">B팀</span><strong id="scoreB">0</strong></div></div>
-            <div class="card"><h3>게임 진행</h3><p id="turnText">A팀 차례입니다.</p><div class="choice-row"><button class="primary" id="randomCell">무작위 칸 뽑기</button><button class="secondary" id="resetGame">게임 초기화</button></div><div class="tiny" style="margin-top:12px">숫자 칸을 직접 눌러도 됩니다.</div></div>
+          <div class="game-side">
+            <div class="scoreboard"><div class="team active" id="teamA"><span>A팀</span><strong id="scoreA">0</strong></div><div class="team" id="teamB"><span>B팀</span><strong id="scoreB">0</strong></div></div>
+            <div class="card"><h3 id="turnText">A팀 차례입니다.</h3><div class="nav-actions"><button class="primary" id="randomCell">무작위 칸</button><button class="secondary" id="resetGame">게임 초기화</button></div><small>숫자 칸을 직접 눌러도 됩니다.</small></div>
           </div>
         </div>
       </section>
@@ -145,18 +254,19 @@
   </div>
 
   <nav class="mobile-nav" id="mobileNav"></nav>
-  <footer class="footer">수업용 프로토타입 · 브라우저 안에서만 동작하며 로그인과 서버 저장이 필요하지 않습니다.</footer>
+  <footer>중학교 3학년 국어 · 문장의 짜임 수업용</footer>
 </div>
 
-<div class="quiz-modal" id="quizModal" role="dialog" aria-modal="true" aria-labelledby="qTitle">
+<div class="modal" id="quizModal" role="dialog" aria-modal="true" aria-labelledby="qTitle">
   <div class="modal-card">
-    <div class="modal-head"><div><span class="pill" id="qType">문제</span><h3 id="qTitle" style="margin:10px 0 0">문제</h3></div><button class="close" id="modalClose" aria-label="닫기">×</button></div>
-    <div class="question" id="qText"></div>
-    <div class="choice-row" id="qChoices"></div>
+    <div class="modal-head"><div><span class="pill" id="qType">문제</span><h3 id="qTitle">문제</h3></div><button class="close" id="modalClose" aria-label="닫기">×</button></div>
+    <div class="modal-question" id="qText"></div>
+    <div class="choices" id="qChoices"></div>
     <div class="feedback" id="qFeedback"></div>
-    <div class="choice-row" style="margin-top:16px"><button class="secondary teacher-only" id="qReveal">정답 보기</button></div>
+    <button class="secondary teacher-only" id="qReveal">정답 보기</button>
   </div>
 </div>
+
 <script src="./app.js"></script>
 </body>
 </html>
